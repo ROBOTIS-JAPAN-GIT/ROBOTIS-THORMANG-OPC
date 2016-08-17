@@ -25,5 +25,7 @@
   <run_depend>cmake_modules</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>geometry_msgs</run_depend>
+  <run_depend>robotis_controller_msgs</run_depend>
+  <run_depend>thormang3_walking_module_msgs</run_depend>
   <run_depend>message_runtime</run_depend>
 </package>
