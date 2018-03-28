@@ -14,7 +14,7 @@
    <string>Thormang3 Demo GUI</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../ROBOTIS-OP2/op2_demo/resources/images.qrc">
+   <iconset resource="../../thormang3_offset_tuner_client/resources/images.qrc">
     <normaloff>:/images/icon.png</normaloff>:/images/icon.png</iconset>
   </property>
   <property name="locale">
@@ -411,7 +411,7 @@
           <bool>true</bool>
          </property>
          <property name="currentIndex">
-          <number>5</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="tab_mode">
           <attribute name="title">
@@ -1534,7 +1534,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>796</width>
-                <height>298</height>
+                <height>304</height>
                </rect>
               </property>
              </widget>
@@ -1956,8 +1956,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>770</width>
-                   <height>107</height>
+                   <width>772</width>
+                   <height>106</height>
                   </rect>
                  </property>
                 </widget>
@@ -1994,7 +1994,7 @@
      <x>0</x>
      <y>0</y>
      <width>1700</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -2039,7 +2039,7 @@
   </action>
  </widget>
  <resources>
-  <include location="../../../ROBOTIS-OP2/op2_demo/resources/images.qrc"/>
+  <include location="../../thormang3_offset_tuner_client/resources/images.qrc"/>
  </resources>
  <connections>
   <connection>
