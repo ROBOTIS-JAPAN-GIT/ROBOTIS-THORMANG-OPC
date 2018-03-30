@@ -9,7 +9,7 @@
 ## ROBOTIS e-Manual for ROBOTIS THORMANG3
 - [ROBOTIS e-Manual for ROBOTIS THORMANG3](http://emanual.robotis.com/docs/en/platform/thormang3/introduction/)
 
-## Wiki for thormang3_tools Packages
+## Wiki for thormang3_opc Packages
 - http://wiki.ros.org/thormang3_opc (metapackage)
 - http://wiki.ros.org/thormang3_action_script_player
 - http://wiki.ros.org/thormang3_demo
