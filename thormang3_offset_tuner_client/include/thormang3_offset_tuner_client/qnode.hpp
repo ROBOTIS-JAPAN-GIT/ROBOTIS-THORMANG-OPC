@@ -31,11 +31,11 @@
 #include <string>
 #include <QThread>
 #include <QStringListModel>
-#include <yaml-cpp/yaml.h>
 
 #include <ros/ros.h>
 #include <ros/package.h>
 #include <std_msgs/String.h>
+#include <yaml-cpp/yaml.h>
 
 #include "thormang3_offset_tuner_msgs/JointOffsetData.h"
 #include "thormang3_offset_tuner_msgs/JointOffsetPositionData.h"
