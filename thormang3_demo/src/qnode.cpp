@@ -76,7 +76,7 @@ bool QNodeThor3::init()
 
   ros::NodeHandle nh;
 
-  package_name_ = ros::package::getPath("thormang3_demo");
+  package_name_ = ros::package::getPath("thormang3_ndaj_demo");
 
   // Add your ros communications here.
   status_msg_sub_ = nh.subscribe("/robotis/status", 10, &QNodeThor3::statusMsgCallback, this);
