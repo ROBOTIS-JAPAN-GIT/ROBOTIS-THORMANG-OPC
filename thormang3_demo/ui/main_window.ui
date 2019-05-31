@@ -7,18 +7,18 @@
     <x>0</x>
     <y>0</y>
     <width>1700</width>
-    <height>1006</height>
+    <height>1016</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Thormang3 Demo GUI</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../thormang3_offset_tuner_client/resources/images.qrc">
+   <iconset resource="../resources/images.qrc">
     <normaloff>:/images/icon.png</normaloff>:/images/icon.png</iconset>
   </property>
   <property name="locale">
-   <locale language="English" country="Australia"/>
+   <locale language="English" country="UnitedStates"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout">
@@ -42,6 +42,189 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Overload Status</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_19">
+           <item row="0" column="2" colspan="2">
+            <widget class="QWidget" name="widget_overload_right" native="true">
+             <layout class="QGridLayout" name="gridLayout_18">
+              <item row="0" column="0" colspan="2">
+               <widget class="QLabel" name="label_overload_right">
+                <property name="font">
+                 <font>
+                  <pointsize>14</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(78, 154, 6);
+color: rgb(46, 52, 54);
+</string>
+                </property>
+                <property name="text">
+                 <string>Right Knee Overload</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_overload_right_warning">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(196, 160, 0);
+color: rgb(85, 87, 83);</string>
+                </property>
+                <property name="text">
+                 <string>Warning Count : 0</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="label_overload_right_error">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(204, 0, 0);
+color: rgb(211, 215, 207);
+</string>
+                </property>
+                <property name="text">
+                 <string>Error Count : 0</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QWidget" name="widget_over_left" native="true">
+             <layout class="QGridLayout" name="gridLayout_17">
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_overload_left_warning">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(196, 160, 0);
+color: rgb(85, 87, 83);</string>
+                </property>
+                <property name="text">
+                 <string>Warning Count : 0</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="label_overload_left_error">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(204, 0, 0);
+color: rgb(211, 215, 207);
+</string>
+                </property>
+                <property name="text">
+                 <string>Error Count : 0</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="2">
+               <widget class="QLabel" name="label_overload_left">
+                <property name="font">
+                 <font>
+                  <pointsize>14</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(78, 154, 6);
+color: rgb(46, 52, 54);
+</string>
+                </property>
+                <property name="text">
+                 <string>Left Knee Overload</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <widget class="QWidget" name="widget_overload_button" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <item>
+               <widget class="QPushButton" name="pushButton">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Reset Count</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
          <widget class="QGroupBox" name="groupBox_log">
           <property name="sizePolicy">
            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
@@ -53,7 +236,10 @@
            <string>Logging</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="1" column="0">
+           <item row="0" column="1">
+            <widget class="QListView" name="view_logging"/>
+           </item>
+           <item row="1" column="1">
             <widget class="QPushButton" name="button_clear_log">
              <property name="minimumSize">
               <size>
@@ -65,9 +251,6 @@
               <string>Clear</string>
              </property>
             </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QListView" name="view_logging"/>
            </item>
           </layout>
          </widget>
@@ -411,7 +594,7 @@
           <bool>true</bool>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_mode">
           <attribute name="title">
@@ -1534,7 +1717,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>796</width>
-                <height>304</height>
+                <height>300</height>
                </rect>
               </property>
              </widget>
@@ -1957,7 +2140,7 @@
                    <x>0</x>
                    <y>0</y>
                    <width>772</width>
-                   <height>106</height>
+                   <height>70</height>
                   </rect>
                  </property>
                 </widget>
@@ -1994,7 +2177,7 @@
      <x>0</x>
      <y>0</y>
      <width>1700</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -2039,7 +2222,7 @@
   </action>
  </widget>
  <resources>
-  <include location="../../thormang3_offset_tuner_client/resources/images.qrc"/>
+  <include location="../resources/images.qrc"/>
  </resources>
  <connections>
   <connection>

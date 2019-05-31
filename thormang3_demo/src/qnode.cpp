@@ -1550,6 +1550,23 @@ void QNodeThor3::kickDemo(const std::string &kick_foot)
   }
 }
 
+// Overload
+void QNodeThor3::overloadStatusCallback(const thormang3_alarm_module_msgs::JointOverloadStatus::ConstPtr &msg)
+{
+  for(int ix = 0; ix < msg->name.size(); ix++)
+  {
+    if(msg->name[ix].find("r_leg_kn_p") != std::string::npos)
+    {
+      Q_EMIT updateOverloadStatus(Right, msg->status[ix], msg->warning_count[ix], msg->error_count[ix]);
+    }
+    else if(msg->name[ix].find("l_leg_kn_p") != std::string::npos)
+    {
+      Q_EMIT updateOverloadStatus(Left, msg->status[ix], msg->warning_count[ix], msg->error_count[ix]);
+    }
+  }
+}
+
+
 // LOG
 void QNodeThor3::statusMsgCallback(const robotis_controller_msgs::StatusMsg::ConstPtr &msg)
 {

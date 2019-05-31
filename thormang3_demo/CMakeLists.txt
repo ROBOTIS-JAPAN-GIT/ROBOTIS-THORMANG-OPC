@@ -21,6 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
   thormang3_feet_ft_module_msgs
   thormang3_manipulation_module_msgs
   thormang3_walking_module_msgs
+  thormang3_alarm_module_msgs
   thormang3_foot_step_generator
   eigen_conversions
   cmake_modules
@@ -79,6 +80,7 @@ catkin_package(
   thormang3_feet_ft_module_msgs
   thormang3_manipulation_module_msgs
   thormang3_walking_module_msgs
+  thormang3_alarm_module_msgs
   thormang3_foot_step_generator
   eigen_conversions
   cmake_modules

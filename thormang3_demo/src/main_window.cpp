@@ -39,9 +39,9 @@ using namespace Qt;
  *****************************************************************************/
 
 MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
-    : QMainWindow(parent),
-      qnode_thor3_(argc, argv),
-      is_updating_(false)
+  : QMainWindow(parent),
+    qnode_thor3_(argc, argv),
+    is_updating_(false)
 {
   // code to DEBUG
   debug_print_ = false;
@@ -106,6 +106,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
   initModeUnit();
   setUserShortcut();
   updateModuleUI();
+  clearOverload();
 }
 
 MainWindow::~MainWindow()
@@ -891,6 +892,121 @@ void MainWindow::clearMarkerPanel()
   qnode_thor3_.clearInteractiveMarker();
 }
 
+// overload status
+void MainWindow::updateOverloadStatus(int side, int overload_status, int warning_count, int error_count)
+{
+  if(side == QNodeThor3::Right)
+  {
+    switch(overload_status)
+    {
+    case thormang3_alarm_module_msgs::JointOverloadStatus::NORMAL:
+      ui_.label_overload_right->setStyleSheet(sytlesheet_overload_normal);
+      break;
+
+    case thormang3_alarm_module_msgs::JointOverloadStatus::WARNING:
+      ui_.label_overload_right->setStyleSheet(sytlesheet_overload_warning);
+      break;
+
+    case thormang3_alarm_module_msgs::JointOverloadStatus::ERROR:
+      ui_.label_overload_right->setStyleSheet(sytlesheet_overload_error);
+      break;
+
+    case thormang3_alarm_module_msgs::JointOverloadStatus::EMERGENCY:
+      ui_.label_overload_right->setStyleSheet(sytlesheet_overload_error);
+      break;
+
+    default:
+      break;
+    }
+
+    if(warning_count <= 0)
+    {
+      std::string msg = "Warning Count : 0";
+      ui_.label_overload_right_warning->setText(tr(msg));
+      ui_.label_overload_right_warning->setStyleSheet(sytlesheet_overload_none);
+    }
+    else
+    {
+      std::stringstream msg_ss;
+      msg_ss << "Warning Count : " << warning_count;
+      ui_.label_overload_right_warning->setText(tr(msg_ss.str()));
+      ui_.label_overload_right_warning->setStyleSheet(sytlesheet_overload_warning);
+    }
+
+    if(error_count <= 0)
+    {
+      std::string msg = "Warning Count : 0";
+      ui_.label_overload_right_error->setText(tr(msg));
+      ui_.label_overload_right_error->setStyleSheet(sytlesheet_overload_none);
+    }
+    else
+    {
+      std::stringstream msg_ss;
+      msg_ss << "Error Count : " << error_count;
+      ui_.label_overload_right_error->setText(tr(msg_ss.str()));
+      ui_.label_overload_right_error->setStyleSheet(sytlesheet_overload_error);
+    }
+  }
+  else if(side == QNodeThor3::Left)
+  {
+    switch(overload_status)
+    {
+    case thormang3_alarm_module_msgs::JointOverloadStatus::NORMAL:
+      ui_.label_overload_left->setStyleSheet(sytlesheet_overload_normal);
+      break;
+
+    case thormang3_alarm_module_msgs::JointOverloadStatus::WARNING:
+      ui_.label_overload_left->setStyleSheet(sytlesheet_overload_warning);
+      break;
+
+    case thormang3_alarm_module_msgs::JointOverloadStatus::ERROR:
+      ui_.label_overload_left->setStyleSheet(sytlesheet_overload_error);
+      break;
+
+    case thormang3_alarm_module_msgs::JointOverloadStatus::EMERGENCY:
+      ui_.label_overload_left->setStyleSheet(sytlesheet_overload_error);
+      break;
+
+    default:
+      break;
+    }
+
+    if(warning_count <= 0)
+    {
+      std::string msg = "Warning Count : 0";
+      ui_.label_overload_left_warning->setText(tr(msg));
+      ui_.label_overload_left_warning->setStyleSheet(sytlesheet_overload_none);
+    }
+    else
+    {
+      std::stringstream msg_ss;
+      msg_ss << "Warning Count : " << warning_count;
+      ui_.label_overload_left_warning->setText(tr(msg_ss.str()));
+      ui_.label_overload_left_warning->setStyleSheet(sytlesheet_overload_warning);
+    }
+
+    if(error_count <= 0)
+    {
+      std::string msg = "Warning Count : 0";
+      ui_.label_overload_left_error->setText(tr(msg));
+      ui_.label_overload_left_error->setStyleSheet(sytlesheet_overload_none);
+    }
+    else
+    {
+      std::stringstream msg_ss;
+      msg_ss << "Error Count : " << error_count;
+      ui_.label_overload_left_error->setText(tr(msg_ss.str()));
+      ui_.label_overload_left_error->setStyleSheet(sytlesheet_overload_error);
+    }
+  }
+}
+
+void MainWindow::clearOverload()
+{
+  updateOverloadStatus(QNodeThor3::Right, thormang3_alarm_module_msgs::JointOverloadStatus::NORMAL, 0, 0);
+  updateOverloadStatus(QNodeThor3::Left, thormang3_alarm_module_msgs::JointOverloadStatus::NORMAL, 0, 0);
+}
+
 /*****************************************************************************
  ** Implementation [Menu]
  *****************************************************************************/
@@ -914,7 +1030,7 @@ void MainWindow::initModeUnit()
 
   // parse yaml : preset modules
   for (std::map<int, std::string>::iterator iter = qnode_thor3_.module_table_.begin();
-      iter != qnode_thor3_.module_table_.end(); ++iter)
+       iter != qnode_thor3_.module_table_.end(); ++iter)
   {
     std::string preset_name = iter->second;
     QPushButton *preset_button = new QPushButton(tr(preset_name.c_str()));
@@ -1007,7 +1123,7 @@ void MainWindow::initMotionUnit()
   // yaml preset
   int index = 0;
   for (std::map<int, std::string>::iterator iter = qnode_thor3_.motion_table_.begin();
-      iter != qnode_thor3_.motion_table_.end(); ++iter)
+       iter != qnode_thor3_.motion_table_.end(); ++iter)
   {
     int motion_index = iter->first;
     std::string motion_name = iter->second;

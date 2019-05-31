@@ -26,6 +26,7 @@
   <depend>thormang3_feet_ft_module_msgs</depend>
   <depend>thormang3_manipulation_module_msgs</depend>
   <depend>thormang3_walking_module_msgs</depend>
+  <depend>thormang3_alarm_module_msgs</depend>
   <depend>thormang3_foot_step_generator</depend>
   <depend>eigen_conversions</depend>
   <depend>cmake_modules</depend>
