@@ -119,7 +119,7 @@ void QNode::send_command_msg(std_msgs::String msg)
   log(Info, log_msg.str());
 }
 
-void QNode::getPresentJointOffsetData()
+void QNode::getPresentJointOffsetData(bool recalculate_offset)
 {
   is_refresh_ = true;
   thormang3_offset_tuner_msgs::GetPresentJointOffsetData get_present_joint_offset_data;
@@ -133,6 +133,9 @@ void QNode::getPresentJointOffsetData()
     {
       thormang3_offset_tuner_msgs::JointOffsetPositionData present_joint_data = get_present_joint_offset_data.response
           .present_data_array[id];
+
+      if(recalculate_offset == true)
+        present_joint_data.offset_value = present_joint_data.present_value - present_joint_data.goal_value;
 
       Q_EMIT update_present_joint_offset_data(present_joint_data);
     }

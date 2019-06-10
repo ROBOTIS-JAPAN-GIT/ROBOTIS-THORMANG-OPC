@@ -137,6 +137,8 @@ Q_OBJECT
   void on_button_motion_demo_0_clicked(bool check);
   void on_button_motion_demo_1_clicked(bool check);
 
+  void on_button_overload_count_reset_clicked(bool check);
+
   /******************************************
    ** Manual connections
    *******************************************/
@@ -155,6 +157,9 @@ Q_OBJECT
   void updatePointPanel(const geometry_msgs::Point point);
   void updatePosePanel(const geometry_msgs::Pose pose);
 
+  // overload
+  void updateOverloadStatus(int side, int overload_status, int warning_count, int error_count);
+
  protected Q_SLOTS:
   void setHeadJointsAngle();
   void playMotion(int motion_index);
@@ -163,6 +168,11 @@ Q_OBJECT
   static const double GRIPPER_ON_ANGLE = 60;
   static const double GRIPPER_OFF_ANGLE = 5;
   static const double GRIPPER_TORQUE_LIMIT = 250;
+
+  QString sytlesheet_overload_normal = QString("background-color: rgb(78, 154, 6); color: rgb(46, 52, 54);");
+  QString sytlesheet_overload_warning = QString("background-color: rgb(196, 160, 0); color: rgb(85, 87, 83);");
+  QString sytlesheet_overload_error = QString("background-color: rgb(204, 0, 0); color: rgb(211, 215, 207);");
+  QString sytlesheet_overload_none = QString("background-color: rgba(10, 10, 10, 10); color: rgba(0, 0, 0, 0);");
 
   void setUserShortcut();
   void initModeUnit();
@@ -179,6 +189,8 @@ Q_OBJECT
   void setPoseToMarkerPanel(const geometry_msgs::Pose &current);
   void getPointFromMarkerPanel(geometry_msgs::Point &current);
   void setPointToMarkerPanel(const geometry_msgs::Point &current);
+
+  void clearOverload();
 
   /******************************************
    ** Transformation

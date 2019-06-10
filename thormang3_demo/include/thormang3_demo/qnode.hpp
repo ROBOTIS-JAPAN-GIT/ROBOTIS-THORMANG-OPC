@@ -68,6 +68,8 @@
 #include "thormang3_foot_step_generator/FootStepCommand.h"
 #include "thormang3_foot_step_generator/Step2DArray.h"
 
+#include "thormang3_alarm_module_msgs/JointOverloadStatus.h"
+
 #endif // Q_MOC_RUN
 /*****************************************************************************
  ** Namespaces
@@ -94,13 +96,11 @@ Q_OBJECT
     Fatal = 4
   };
 
-  //  enum ModuleIndex
-  //  {
-  //    Control_None = 0,
-  //    Control_Walking = 1,
-  //    Control_Manipulation = 2,
-  //    Control_Head = 3,
-  //  };
+  enum Side
+  {
+    Right = 0,
+    Left = 1,
+  };
 
   QNodeThor3(int argc, char** argv);
   virtual ~QNodeThor3();
@@ -160,6 +160,9 @@ Q_OBJECT
   void manipulationDemo(const int& index);
   void kickDemo(const std::string& kick_foot);
 
+  // overload - alarm
+  void publishAlarmCommand(const std::string &command);
+
   std::map<int, std::string> module_table_;
   std::map<int, std::string> motion_table_;
 
@@ -188,6 +191,9 @@ Q_SIGNALS:
   // Interactive marker
   void updateDemoPoint(const geometry_msgs::Point point);
   void updateDemoPose(const geometry_msgs::Pose pose);
+
+  // Overload
+  void updateOverloadStatus(int side, int overload_status, int warning_count, int error_count);
 
  private:
   enum Control_Index
@@ -219,11 +225,14 @@ Q_SIGNALS:
   void turnOnBalance();
   void turnOffBalance();
   bool loadFeedbackGainFromYaml();
+  void overloadStatusCallback(const thormang3_alarm_module_msgs::JointOverloadStatus::ConstPtr &msg);
 
   int init_argc_;
   char** init_argv_;
   bool debug_print_;
   int current_control_ui_;
+  std::string balance_yaml_path_;
+  std::string joint_feedback_yaml_path_;
 
   // demo : interactive marker
   ros::Subscriber rviz_clicked_point_sub_;
@@ -285,6 +294,10 @@ Q_SIGNALS:
   std::map<int, std::string> index_mode_table_;
   std::map<std::string, int> mode_index_table_;
   std::map<std::string, bool> using_mode_table_;
+
+  // Overload - Alarm
+  ros::Publisher overload_com_pub_;
+  ros::Subscriber overload_status_sub_;
 };
 
 }  // namespace thormang3_demo

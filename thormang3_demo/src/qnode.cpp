@@ -78,6 +78,9 @@ bool QNodeThor3::init()
 
   package_name_ = ros::package::getPath("thormang3_demo");
 
+  balance_yaml_path_ = nh.param<std::string>("balance_file_path", package_name_ + "/config/balance_param.yaml");
+  joint_feedback_yaml_path_ = nh.param<std::string>("joint_feedback_file_path", package_name_ + "/config/joint_feedback_gain.yaml");
+
   // Add your ros communications here.
   status_msg_sub_ = nh.subscribe("/robotis/status", 10, &QNodeThor3::statusMsgCallback, this);
   current_module_control_sub_ = nh.subscribe("/robotis/present_joint_ctrl_modules", 10,
@@ -136,6 +139,10 @@ bool QNodeThor3::init()
   // Action
   motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/demo/action_index", 0);
   motion_page_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
+
+  // Overload - Alarm
+  overload_com_pub_ = nh.advertise<std_msgs::String>("/robotis/overload/command", 0);
+  overload_status_sub_ = nh.subscribe("/robotis/overload/status", 10, &QNodeThor3::overloadStatusCallback, this);
 
   // Config
   std::string default_config_path = ros::package::getPath("thormang3_demo") + "/config/demo_config.yaml";
@@ -987,14 +994,11 @@ void QNodeThor3::setBalanceParameter()
 
 bool QNodeThor3::loadBalanceParameterFromYaml()
 {
-  std::string balance_yaml_path = "";
-  balance_yaml_path = package_name_ + "/config/balance_param.yaml";
-
   YAML::Node doc;
   try
   {
     // load yaml
-    doc = YAML::LoadFile(balance_yaml_path.c_str());
+    doc = YAML::LoadFile(balance_yaml_path_.c_str());
 
     double cob_x_offset_m                      = doc["cob_x_offset_m"].as<double>();
     double cob_y_offset_m                      = doc["cob_y_offset_m"].as<double>();
@@ -1109,14 +1113,11 @@ bool QNodeThor3::setFeedBackGain()
 
 bool QNodeThor3::loadFeedbackGainFromYaml()
 {
-  std::string balance_yaml_path = "";
-  balance_yaml_path = package_name_ + "/config/joint_feedback_gain.yaml";
-
   YAML::Node doc;
   try
   {
     // load yaml
-    doc = YAML::LoadFile(balance_yaml_path.c_str());
+    doc = YAML::LoadFile(joint_feedback_yaml_path_.c_str());
 
     set_joint_feedback_gain_srv_.request.updating_duration                 = 2.0;
     set_joint_feedback_gain_srv_.request.feedback_gain.r_leg_hip_y_p_gain  = doc["r_leg_hip_y_p_gain"].as<double>();
@@ -1548,6 +1549,31 @@ void QNodeThor3::kickDemo(const std::string &kick_foot)
     // wait for recovering balance
     usleep(2 * 1000 * 1000);
   }
+}
+
+// Overload
+void QNodeThor3::overloadStatusCallback(const thormang3_alarm_module_msgs::JointOverloadStatus::ConstPtr &msg)
+{
+  for(int ix = 0; ix < msg->name.size(); ix++)
+  {
+    if(msg->name[ix].find("r_leg_kn_p") != std::string::npos)
+    {
+      Q_EMIT updateOverloadStatus(Right, msg->status[ix], msg->warning_count[ix], msg->error_count[ix]);
+    }
+    else if(msg->name[ix].find("l_leg_kn_p") != std::string::npos)
+    {
+      Q_EMIT updateOverloadStatus(Left, msg->status[ix], msg->warning_count[ix], msg->error_count[ix]);
+    }
+  }
+}
+
+void QNodeThor3::publishAlarmCommand(const std::string &command)
+{
+  std_msgs::String comm_msg;
+  comm_msg.data = command;
+
+  overload_com_pub_.publish(comm_msg);
+  log(Info, "send overload command" + command);
 }
 
 // LOG

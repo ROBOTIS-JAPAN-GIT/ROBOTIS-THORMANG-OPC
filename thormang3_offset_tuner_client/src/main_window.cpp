@@ -132,7 +132,7 @@ void MainWindow::all_torque_on_button_clicked(QObject *button_group)
       torque_buttons[ix]->click();
   }
 
-  offset_tuner_qnode_.getPresentJointOffsetData();
+  offset_tuner_qnode_.getPresentJointOffsetData(true);
 
   all_torque_on_ = false;
 }
@@ -185,7 +185,7 @@ void MainWindow::publish_torque_msgs(std::string &joint_name, bool torque_on)
   offset_tuner_qnode_.send_torque_enable_msg(msg_array);
 
   if (all_torque_on_ == false)
-    offset_tuner_qnode_.getPresentJointOffsetData();
+    offset_tuner_qnode_.getPresentJointOffsetData(true);
 }
 
 void MainWindow::spinBox_valueChanged(QString joint_name)
