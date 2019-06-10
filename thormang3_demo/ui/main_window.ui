@@ -199,12 +199,18 @@ color: rgb(46, 52, 54);
             <widget class="QWidget" name="widget_overload_button" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_6">
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="button_overload_count_reset">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>10</width>
+                  <height>10</height>
+                 </size>
                 </property>
                 <property name="font">
                  <font>
@@ -2307,7 +2313,7 @@ color: rgb(46, 52, 54);
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_walking_demo"/>
   <buttongroup name="buttonGroup_manipulation_demo"/>
+  <buttongroup name="buttonGroup_walking_demo"/>
  </buttongroups>
 </ui>

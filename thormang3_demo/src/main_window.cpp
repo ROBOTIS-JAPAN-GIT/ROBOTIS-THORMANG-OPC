@@ -93,6 +93,8 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
           SLOT(updatePointPanel(geometry_msgs::Point)));
   connect(&qnode_thor3_, SIGNAL(updateDemoPose(geometry_msgs::Pose)), this, SLOT(updatePosePanel(geometry_msgs::Pose)));
 
+  connect(&qnode_thor3_, SIGNAL(updateOverloadStatus(int,int,int,int)), this, SLOT(updateOverloadStatus(int,int,int,int)));
+
   /*********************
    ** Logging
    **********************/
@@ -589,6 +591,12 @@ void MainWindow::on_button_motion_demo_1_clicked(bool check)
   qnode_thor3_.enableControlModule("action_module");
 }
 
+void MainWindow::on_button_overload_count_reset_clicked(bool check)
+{
+  qnode_thor3_.publishAlarmCommand("reset");
+  clearOverload();
+}
+
 /*****************************************************************************
  ** Implemenation [Slots][manually connected]
  *****************************************************************************/
@@ -922,28 +930,28 @@ void MainWindow::updateOverloadStatus(int side, int overload_status, int warning
     if(warning_count <= 0)
     {
       std::string msg = "Warning Count : 0";
-      ui_.label_overload_right_warning->setText(tr(msg));
+      ui_.label_overload_right_warning->setText(tr(msg.c_str()));
       ui_.label_overload_right_warning->setStyleSheet(sytlesheet_overload_none);
     }
     else
     {
       std::stringstream msg_ss;
       msg_ss << "Warning Count : " << warning_count;
-      ui_.label_overload_right_warning->setText(tr(msg_ss.str()));
+      ui_.label_overload_right_warning->setText(tr(msg_ss.str().c_str()));
       ui_.label_overload_right_warning->setStyleSheet(sytlesheet_overload_warning);
     }
 
     if(error_count <= 0)
     {
       std::string msg = "Warning Count : 0";
-      ui_.label_overload_right_error->setText(tr(msg));
+      ui_.label_overload_right_error->setText(tr(msg.c_str()));
       ui_.label_overload_right_error->setStyleSheet(sytlesheet_overload_none);
     }
     else
     {
       std::stringstream msg_ss;
       msg_ss << "Error Count : " << error_count;
-      ui_.label_overload_right_error->setText(tr(msg_ss.str()));
+      ui_.label_overload_right_error->setText(tr(msg_ss.str().c_str()));
       ui_.label_overload_right_error->setStyleSheet(sytlesheet_overload_error);
     }
   }
@@ -974,28 +982,28 @@ void MainWindow::updateOverloadStatus(int side, int overload_status, int warning
     if(warning_count <= 0)
     {
       std::string msg = "Warning Count : 0";
-      ui_.label_overload_left_warning->setText(tr(msg));
+      ui_.label_overload_left_warning->setText(tr(msg.c_str()));
       ui_.label_overload_left_warning->setStyleSheet(sytlesheet_overload_none);
     }
     else
     {
       std::stringstream msg_ss;
       msg_ss << "Warning Count : " << warning_count;
-      ui_.label_overload_left_warning->setText(tr(msg_ss.str()));
+      ui_.label_overload_left_warning->setText(tr(msg_ss.str().c_str()));
       ui_.label_overload_left_warning->setStyleSheet(sytlesheet_overload_warning);
     }
 
     if(error_count <= 0)
     {
       std::string msg = "Warning Count : 0";
-      ui_.label_overload_left_error->setText(tr(msg));
+      ui_.label_overload_left_error->setText(tr(msg.c_str()));
       ui_.label_overload_left_error->setStyleSheet(sytlesheet_overload_none);
     }
     else
     {
       std::stringstream msg_ss;
       msg_ss << "Error Count : " << error_count;
-      ui_.label_overload_left_error->setText(tr(msg_ss.str()));
+      ui_.label_overload_left_error->setText(tr(msg_ss.str().c_str()));
       ui_.label_overload_left_error->setStyleSheet(sytlesheet_overload_error);
     }
   }

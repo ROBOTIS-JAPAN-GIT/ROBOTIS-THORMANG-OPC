@@ -160,6 +160,9 @@ Q_OBJECT
   void manipulationDemo(const int& index);
   void kickDemo(const std::string& kick_foot);
 
+  // overload - alarm
+  void publishAlarmCommand(const std::string &command);
+
   std::map<int, std::string> module_table_;
   std::map<int, std::string> motion_table_;
 
@@ -228,6 +231,8 @@ Q_SIGNALS:
   char** init_argv_;
   bool debug_print_;
   int current_control_ui_;
+  std::string balance_yaml_path_;
+  std::string joint_feedback_yaml_path_;
 
   // demo : interactive marker
   ros::Subscriber rviz_clicked_point_sub_;
@@ -289,6 +294,10 @@ Q_SIGNALS:
   std::map<int, std::string> index_mode_table_;
   std::map<std::string, int> mode_index_table_;
   std::map<std::string, bool> using_mode_table_;
+
+  // Overload - Alarm
+  ros::Publisher overload_com_pub_;
+  ros::Subscriber overload_status_sub_;
 };
 
 }  // namespace thormang3_demo
