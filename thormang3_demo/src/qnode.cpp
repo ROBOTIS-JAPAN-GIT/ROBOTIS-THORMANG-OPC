@@ -597,7 +597,7 @@ void QNodeThor3::sendIkMsg(thormang3_manipulation_module_msgs::KinematicsPose ms
            << "des. pos. y : " << msg.pose.position.y << " \n " << "des. pos. z : " << msg.pose.position.z << " \n "
            << "des. ori. x : " << msg.pose.orientation.x << " \n " << "des. ori. y : " << msg.pose.orientation.y
            << " \n " << "des. ori. z : " << msg.pose.orientation.z << " \n " << "des. ori. w : "
-           << msg.pose.orientation.w << " \n ";
+           << msg.pose.orientation.w << " \n " << "time : " << msg.time << "\n" ; // added move_time
 
   log(Info, log_msgs.str());
 }
