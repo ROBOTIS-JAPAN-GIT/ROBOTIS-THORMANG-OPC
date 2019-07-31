@@ -460,6 +460,9 @@ void MainWindow::on_button_manipulation_demo_5_clicked(bool check)
   msg.pose.orientation.z = orientation.z();
   msg.pose.orientation.w = orientation.w();
 
+  // set move_time
+  msg.time = ui_.dSpinBox_move_time->value();
+
   qnode_thor3_.sendIkMsg(msg);
 
   // clear marker and foot steps
